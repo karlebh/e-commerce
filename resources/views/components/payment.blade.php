@@ -71,7 +71,7 @@
 
 	<!-- Flutterwave Payment -->
 	<div id="Flutterwave" class="tabcontent">
-		<h1>Flutterwave</h1>
+		<h1>Flutterwave</h1> 
 		<form class="max-w-xl m-4 p-10 bg-white rounded shadow-xl" method="POST" action="{{ route('flutterwave.pay') }}">
 		    <p class="text-gray-800 font-medium">Customer information</p>
 		    	{{-- Auth Name --}}

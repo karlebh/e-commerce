@@ -22,7 +22,7 @@
 		    <tr>
 		    	{{-- <td class="w-1/4 ..."></td> --}}
 				<td class="w-1/4 text-justify ...">{{ $item->name }}</td>
-				<td class="w-1/4 text-center ...">${{ $item->price }}</td>
+				<td class="w-1/4 text-center ...">${{ $item->price * $item->quantity }}</td>
 				<td class="w-1/4 text-center ...">{{ $item->quantity }}</td>
 				<td class="w-1/4 text-center ...">
 					<form action="{{ route("cart.destroy", $item->id) }}" method="POST">

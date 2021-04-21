@@ -1,6 +1,6 @@
 <x-all-layout>
 
-	<div class="mx-auto text-center">
+	<div class="mx-auto text-center mt-8">
 		@if($cartContents->count() > 0)
 			<div class="mb-4">
 				<a href="{{ route('checkout.index') }}" class="ml-4 px-4 py-2 font-bold text-black border-gray-700 border-2 mt-4 bg-gray-100">Proceed to Checkout</a>
@@ -11,22 +11,26 @@
 			</div>
 		@endif
 
-		<p class="font-extrabold text-xl">Total: ${{ \Cart::getTotal() }}</p>
+		<p class="font-extrabold text-xl">Total: ${{ \Cart::session('guest')->getTotal() }}</p>
 		{{-- <p>{{ \Cart::getSubTotal() }}</p> --}}
 	</div>
 
-	<div class="flex flex-wrap justify-center">
+	<div class="flex flex-wrap justify-center gap-8">
 		@forelse($cartContents as $item)
 			<div class="w-60 h-40 bg-green-400 m-4 text-center p-3">
-				<p>Name: <span class="font-medium font-bold text-white">{{ $item->name }}</span></p>
-				<p>Pice:  <span class="font-medium font-bold text-white">${{ $item->price }}</span></p>
-				<p>Quantity: <span class="font-medium font-bold text-white">{{ $item->quantity }}</span></p>
+				<p>Name: <span class="font-bold text-white">{{ $item->name }}</span></p>
+				<p>Pice:  <span class="font-bold text-white">${{ $item->price }}</span></p>
 
-				<form action="">
+				<form>
 					Quantity 
-					<select name="quantity" id="" onchange="updateQuantity()">
+					<select name="quantity" data-id="{{ $item->id }}" data-quantity="{{ $item->quantity }}" 
+						class="quantities">
+						@for ($i = 1; $i < 10 ; $i++)
+							<option value="{{ $i }}" {{ $item->quantity == $i ? 'selected' : '' }}>{{ $i }}</option>
+						@endfor
 					</select>
 				</form>
+
 				<form action="{{ route("cart.destroy", $item->id) }}" method="POST">
 					@csrf
 					@method('DELETE')
@@ -47,5 +51,19 @@
 <hr>
 
 @push('extra-js')
+	<script>
+
+		const Quantities = document.querySelectorAll('.quantities')
+		Quantities.forEach(qty => qty.addEventListener('change', () => {
+			const productId = qty.getAttribute('data-id')
+			const newQuantity = qty.value
+			axios.post(`/cart/${productId}`, {
+				quantity: newQuantity,
+				_method: 'patch'
+			})
+			.then(response => location.reload())
+		}))
+
+	</script>
 @endpush
 </x-all-layout>

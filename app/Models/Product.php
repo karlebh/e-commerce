@@ -43,7 +43,40 @@ class Product extends Model
     */
     public function categories()
     {
-        return $this->belongsToMany(Category::class);
+        return $this->belongsToMany(Category::class)->withPivot('category_id', 'product_id');
+    }
+
+    public function picture()
+    {
+        // switch (rand(1, 5)) {
+        //     case 1:
+        //         return "first";
+        //         break;
+
+        //     case 2:
+        //         return "second";
+        //         break;
+
+        //     case 3:
+        //         return "third";
+        //         break;
+
+        //     case 4:
+        //         return "four";
+        //         break;
+
+        //     case 5:
+        //         return "five";
+        //         break;
+            
+        //     default:
+        //         return "excellent";
+        //         break;
+        // }
+        
+        if ($this->categories->category_id = 2) {
+            return "yesss!";
+        }
     }
 
 }

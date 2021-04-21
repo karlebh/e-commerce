@@ -5,7 +5,9 @@ use App\Http\Controllers;
 
 Route::get('/', function () {
     return view('home')
-    		->withProducts(\App\Models\Product::inRandomOrder()
+    		->withProducts(
+    			\App\Models\Product::where('quantity', '>', 0)
+    			// ->inRandomOrder()
     			->take(20)
     			->get());
 })
@@ -23,16 +25,17 @@ Route::get('paystack/callback', [Controllers\PaystackController::class, 'handleG
 			->name('paystack.callback');
 
 Route::post('rave/pay', [Controllers\FlutterwaveController::class, 'initialize'])->name('flutterwave.pay');
-Route::get('rave/callback', [Controllers\FlutterwaveController::class, 'callback'])->name('flutterwave.callback');
+Route::get('rave/callback', [Controllers\FlutterwaveController::class, 'callback'])
+			->name('flutterwave.callback');
 
 Route::view('success', 'checkout.success')->name('checkout.success');
 Route::view('failure', 'checkout.failure')->name('checkout.failure');
-Route::post('cart', [Controllers\CartController::class, 'store'])->name('cart.store');
-Route::post('cart/checkout', [Controllers\CartController::class, 'checkout'])->name('cart.checkout');
+
 Route::get('cart', [Controllers\CartController::class, 'index'])->name('cart.index');
-Route::delete('cart/{cart}', [Controllers\CartController::class, 'destroy'])->name('cart.destroy');
+Route::post('cart', [Controllers\CartController::class, 'store'])->name('cart.store');
+Route::patch('cart/{id}', [Controllers\CartController::class, 'update'])->name('cart.update');
+Route::delete('cart/{id}', [Controllers\CartController::class, 'destroy'])->name('cart.destroy');
 Route::get('all', [Controllers\CartController::class, 'all'])->name('cart.all');
-Route::patch('editQuantity', [Controllers\CartController::class, 'editQuantity'])->name('cart.edit.quantity');
 
 Route::get('checkout', [Controllers\CheckoutController::class, 'index'])
 			->middleware('checkout')

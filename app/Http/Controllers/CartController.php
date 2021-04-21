@@ -2,35 +2,53 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Darryldecode\Cart\CartCondition\Cart;
 
 class CartController extends Controller
 {
+    public function index()
+    {
+        return view('cart.index')
+            ->with('cartContents', \Cart::session('guest')->getContent());
+    }
+
     public function store(Request $request)
     {
 
-    	$item = \Cart::session('guest')->get($request->all()['id']);
+    	if (\Cart::session('guest')->get($request->id)) {
 
-    	if ($item) {
-    		session()->flash('message', 'Item already in cart!'); 
+            $qty = \Cart::session('guest')->get($request->id)->quantity;
+            $name = \Cart::session('guest')->get($request->id)->name;
+
+            \Cart::session('guest')->update($request->id, ['quantity' => 1,]);
+            Product::find($request->id)->decrement('quantity');
+
+    		session()->flash('success', 'Item ' . $name . ' quantity has been updated in cart! Present item quantity is ' . ++$qty); 
+
             return redirect()->back();   	
     	}
 
-    	\Cart::session('guest')->add($request->all());
+    	$cart = \Cart::session('guest')->add($request->all());
+
+        Product::find($request->id)->decrement('quantity');
+
+        session()->flash('success', 'Item ' . $request->name .' successfully added to cart!'); 
 
     	return redirect()->back();
     }
 
-    public function index(Request $request)
+    public function update(Request $request, $id)
     {
-    	return view('cart.index')
-    		->with('cartContents', \Cart::session('guest')->getContent());
-    }
+    	\Cart::session('guest')->update($id, [
+            'quantity' => [
+                'relative' => false,
+                'value' => $request->quantity,
+            ],
+        ]);
 
-    public function update($id)
-    {
-    	\Cart::session('guest')->update($id, $request->all()['id']);
+        session()->flash('success', 'Item quantity successfully changed!'); 
         
         return redirect()->back();
     }
@@ -39,20 +57,14 @@ class CartController extends Controller
     {
     	\Cart::session('guest')->remove($id);
 
+         session()->flash('success', 'Item successfully removed!'); 
+
     	return redirect()->back();
-    }
-
-    public function editQuantity(Request $request, $id)
-    {
-    	$request->quantity;
-
-    	// \Cart::update($id, [
-    	// 	'quantity' => $request->quantity,
-    	// ]);
     }
 
     public function all()
     {
+        \Cart::session('guest')->clear();
     	return [\Cart::session('guest')->getContent()];
     }
 }

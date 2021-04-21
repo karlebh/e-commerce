@@ -9,6 +9,8 @@
 					<p>Pice:  <span class="font-medium font-bold text-white">${{ $product->price }}</span></p>
 					<p>Amount Left: <span class="font-medium font-bold text-white">{{ $product->quantity }}</span></p>
 
+					{{ $product->picture() }}
+
 				</div>
 			</a>
 			{{--  --}}
@@ -19,7 +21,7 @@
 				<input type="hidden" name="id" value="{{ $product->id }}">
 				<input type="hidden" name="name" value="{{ $product->name }}">
 				<input type="hidden" name="price" value="{{ $product->price }}">
-				<input type="hidden" name="quantity" value="{{ $product->quantity }}">
+				<input type="hidden" name="quantity" value="1">
 				<input type="hidden" name="associatedModel" value="{{ "App\Models\Product" }}">
 				<input type="hidden" name="attributes['color']" value="red">
 
