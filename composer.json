@@ -19,11 +19,11 @@
         "livewire/livewire": "^2.0",
         "stripe/stripe-php": "^7.76",
         "unicodeveloper/laravel-paystack": "^1.0",
-        "ext-pdo_sqlite": "*"
+        "ext-pdo_sqlite": "*",
+        "fakerphp/faker": "^1.9.1"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
-        "fakerphp/faker": "^1.9.1",
         "jasonmccreary/laravel-test-assertions": "^1.1",
         "laravel-shift/blueprint": "^1.23",
         "laravel/sail": "^1.0.1",
