@@ -12,16 +12,15 @@
 		@endif
 
 		<p class="font-extrabold text-xl">Total: ${{ \Cart::session('guest')->getTotal() }}</p>
-		{{-- <p>{{ \Cart::getSubTotal() }}</p> --}}
 	</div>
 
 	<div class="flex flex-wrap justify-center gap-8">
 		@forelse($cartContents as $item)
 			<div class="w-60 h-40 bg-green-400 m-4 text-center p-3">
-				<p>Name: <span class="font-bold text-white">{{ $item->name }}</span></p>
+				<p class="mb-4">Name: <span class="font-bold text-white">{{ $item->name }}</span></p>
 				<p>Pice:  <span class="font-bold text-white">${{ $item->price }}</span></p>
 
-				<form>
+				<form class="mt-3">
 					Quantity 
 					<select name="quantity" data-id="{{ $item->id }}" data-quantity="{{ $item->quantity }}" 
 						class="quantities">
@@ -34,7 +33,7 @@
 				<form action="{{ route("cart.destroy", $item->id) }}" method="POST">
 					@csrf
 					@method('DELETE')
-				<button type="submit" class="ml-4 px-4 py-2 mt-5 font-bold text-black border-gray-700 border-2 bg-gray-100 ">Remove From Cart</button>
+				<button type="submit" class="ml-4 px-4 py-2 mt-2 font-bold text-black border-gray-700 border-2 bg-gray-100 ">Remove From Cart</button>
 
 			</form>
 			</div>
