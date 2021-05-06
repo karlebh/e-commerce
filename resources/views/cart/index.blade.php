@@ -14,7 +14,7 @@
 		<p class="font-extrabold text-xl">Total: ${{ \Cart::session('guest')->getTotal() }}</p>
 	</div>
 
-	<div class="flex flex-wrap justify-center gap-8">
+	<div class="flex flex-wrap justify-center gap-8 font-">
 		@forelse($cartContents as $item)
 			<div class="w-60 h-40 bg-green-400 m-4 text-center p-3">
 				<p class="mb-4">Name: <span class="font-bold text-white">{{ $item->name }}</span></p>

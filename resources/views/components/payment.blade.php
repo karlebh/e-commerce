@@ -158,5 +158,6 @@
 		}
 
 		document.getElementById("defaultOpen").click();
+
 	</script>
 @endpush

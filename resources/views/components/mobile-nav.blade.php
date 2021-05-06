@@ -4,7 +4,7 @@
 			<a href="/"><h1 class="font-bold text-2xl">E Commerce</h1></a>
 		</div>
 
-		<div class="md:flex md:justify-around">
+		<div class="flex justify-around">
 			<a href="{{ route('cart.index') }}" class="mr-8 relative text-md font-bold">
 				Cart
 				@if(! \Cart::session('guest')->isEmpty())
@@ -38,11 +38,15 @@
 		</form>
 		@endauth
 
+		<svg id="hambuger" width="24" height="16" xmlns="http://www.w3.org/2000/svg"><g>
+			<path d="M0 0h24v2H0zM0 7h24v2H0zM0 14h24v2H0z"/></g>
+		</svg>
+
 	</div>
 </div>
 
 {{-- Navigaton Link by the left --}}
-<div class="flex flex-col gap-2 flex-wrap justify-around p-4">
+<div id="mobileNavBar" class="hidden flex-col gap-2 flex-wrap justify-around p-4">
 	<a href="{{ route('home') }}" class="font-bold text-gray-50 bg-green-500 py-3 px-4 md:pl-20">Random Products</a>
 	<a href="{{ route('category.show', 1) }}" class="font-bold text-gray-50 bg-green-500 py-3 px-4 md:pl-20">Shoes</a>
 	<a href="{{ route('category.show', 2) }}" class="font-bold text-gray-50 bg-green-500 py-3 px-4 md:pl-20">Bags</a>
@@ -51,3 +55,16 @@
 	<a href="{{ route('category.show', 5) }}" class="font-bold text-gray-50 bg-green-500 py-3 px-4 md:pl-20">Knickers</a>
 </div>
 </div>
+
+@push('extra-js')
+<script>
+	document.getElementById('hambuger')
+		.onclick = () => {
+			if (document.getElementById('mobileNavBar').classList.contains('hidden')) {
+				document.getElementById('mobileNavBar').classList.replace('hidden', 'flex')
+			} else {
+				document.getElementById('mobileNavBar').classList.replace('flex', 'hidden')
+			}
+		}
+</script>
+@endpush

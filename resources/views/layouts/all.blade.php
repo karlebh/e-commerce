@@ -72,8 +72,6 @@
                         </div>
                     </div>
 
-
-
                     {{-- Navigaton Link by the left --}}
                     <div class="flex flex-wrap justify-around p-2">
                         <a href="{{ route('home') }}" class="font-bold text-gray-50 bg-green-500 py-3 px-4 corners">Random Products</a>
@@ -96,7 +94,7 @@
             </main>
 
             <footer class="h-auto p-10 bg-gray-300 w-full text-center mt-40">
-                <h1 class="font-bold text-xl">Footer</h1>
+                <h1 class="font-bold text-xl">&copy; E-Commerce {{ Date('Y') }}</h1>
             </footer>
         </div>
          @stack('modals')

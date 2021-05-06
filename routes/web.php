@@ -14,11 +14,6 @@ Route::get('/', function () {
 	->name('home');
 
 Route::view('tabs', 'checkout.tabs');
-Route::middleware(['auth:sanctum', 'verified'])
-		->get('dashboard', function () {
-    			return view('dashboard');
-	})->name('dashboard');
-
 
 Route::post('paystack/pay', [Controllers\PaystackController::class, 'redirectToGateway'])->name('paystack.pay');
 Route::get('paystack/callback', [Controllers\PaystackController::class, 'handleGatewayCallback'])
