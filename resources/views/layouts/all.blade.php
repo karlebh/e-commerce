@@ -75,11 +75,16 @@
                     {{-- Navigaton Link by the left --}}
                     <div class="flex flex-wrap justify-around p-2">
                         <a href="{{ route('home') }}" class="font-bold text-gray-50 bg-green-500 py-3 px-4 corners">Random Products</a>
-                        <a href="{{ route('category.show', 1) }}" class="font-bold text-gray-50 bg-green-500 py-3 px-4">Shoes</a>
-                        <a href="{{ route('category.show', 2) }}" class="font-bold text-gray-50 bg-green-500 py-3 px-4">Bags</a>
+                        @forelse(\App\Models\Category::take(4)->get() as $category)
+                            <a href="{{ route('category.show', $category->slug) }}" class="font-bold text-gray-50 bg-green-500 py-3 px-4">{{ $category->name }}</a>
+                        @empty
+                            <p>No new category</p>
+                        @endforelse
+
+                       {{--  <a href="{{ route('category.show', 2) }}" class="font-bold text-gray-50 bg-green-500 py-3 px-4">Bags</a>
                         <a href="{{ route('category.show', 3) }}" class="font-bold text-gray-50 bg-green-500 py-3 px-4">Watches</a>
                         <a href="{{ route('category.show', 4) }}" class="font-bold text-gray-50 bg-green-500 py-3 px-4">Tops</a>
-                        <a href="{{ route('category.show', 5) }}" class="font-bold text-gray-50 bg-green-500 py-3 px-4">Knickers</a>
+                        <a href="{{ route('category.show', 5) }}" class="font-bold text-gray-50 bg-green-500 py-3 px-4">Knickers</a> --}}
                     </div>
                 </div>
 

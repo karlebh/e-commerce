@@ -39,20 +39,27 @@
 			@endif
 		</a>
 		
-		<svg id="hambuger" width="24" height="24" xmlns="http://www.w3.org/2000/svg"><g>
-			<path d="M0 0h24v2H0zM0 7h24v2H0zM0 14h24v2H0z"/></g>
-		</svg>
+		  <svg id="hambuger" class="-mb-2 h-6 w-10" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+            <path class="inline-flex" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            <path class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
 	</div>
 </div>
 
 {{-- Navigaton Link by the left --}}
 <div id="mobileNavBar" class="hidden flex-col gap-2 flex-wrap justify-around p-4">
 	<a href="{{ route('home') }}" class="font-bold text-gray-50 bg-green-500 py-3 px-4 md:pl-20">Random Products</a>
+	 @forelse(\App\Models\Category::take(4)->get() as $category)
+        <a href="{{ route('category.show', $category->slug) }}"  class="font-bold text-gray-50 bg-green-500 py-3 px-4 md:pl-20">{{ $category->name }}</a>
+    @empty
+        <p>No new category</p>
+    @endforelse
+{{-- 
 	<a href="{{ route('category.show', 1) }}" class="font-bold text-gray-50 bg-green-500 py-3 px-4 md:pl-20">Shoes</a>
 	<a href="{{ route('category.show', 2) }}" class="font-bold text-gray-50 bg-green-500 py-3 px-4 md:pl-20">Bags</a>
 	<a href="{{ route('category.show', 3) }}" class="font-bold text-gray-50 bg-green-500 py-3 px-4 md:pl-20">Watches</a>
 	<a href="{{ route('category.show', 4) }}" class="font-bold text-gray-50 bg-green-500 py-3 px-4 md:pl-20">Tops</a>
-	<a href="{{ route('category.show', 5) }}" class="font-bold text-gray-50 bg-green-500 py-3 px-4 md:pl-20">Knickers</a>
+	<a href="{{ route('category.show', 5) }}" class="font-bold text-gray-50 bg-green-500 py-3 px-4 md:pl-20">Knickers</a> --}}
 </div>
 </div>
 

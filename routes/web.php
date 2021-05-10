@@ -35,7 +35,7 @@ Route::get('checkout', [Controllers\CheckoutController::class, 'index'])
 	->middleware('checkout')
 	->name('checkout.index');
 
-Route::get('category/{category:id}', [Controllers\CategoryController::class, 'show'])
+Route::get('category/{category}', [Controllers\CategoryController::class, 'show'])
 	->name('category.show');
 	
 Route::middleware('admin')->group(function () {

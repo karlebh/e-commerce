@@ -51,7 +51,6 @@
 
 @push('extra-js')
 	<script>
-
 		const Quantities = document.querySelectorAll('.quantities')
 		Quantities.forEach(qty => qty.addEventListener('change', () => {
 			const productId = qty.getAttribute('data-id')

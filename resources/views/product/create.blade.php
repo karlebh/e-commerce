@@ -22,11 +22,16 @@
 		<div>
 			<x-jet-label for="name" value="{{ __('category') }}" />
 			<select name="category_id" id="">
-				<option value="1">Shoes</option>
+				@forelse(\App\Models\Category::take(4)->get() as $category)
+					<option value="{{ $category->id }}" class="font-bold text-gray-50 bg-green-500 py-3 px-4">{{ $category->name }}</option>
+				@empty
+					<option>No new category</option>
+				@endforelse
+				{{-- <option value="1">Shoes</option>
 				<option value="2">Bags</option>
 				<option value="3">Watches</option>
 				<option value="4">Tops</option>
-				<option value="5">Knickers</option>
+				<option value="5">Knickers</option> --}}
 			</select>
 		</div>
 
