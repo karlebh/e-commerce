@@ -4,33 +4,27 @@
 			<a href="/"><h1 class="font-bold text-2xl">E Commerce</h1></a>
 		</div>
 
-		<div class="flex justify-around">
-			<a href="{{ route('cart.index') }}" class="mr-8 relative text-md font-bold">
-				Cart
-				@if(! \Cart::session('guest')->isEmpty())
-				<span class="font-extrabold rounded-full w-7 text-center bg-red-600 text-white absolute bottom-1 left-9">{{ \Cart::session('guest')->getContent()->count() }}</span>
-				@endif
-			</a>
+		<div class="flex items-baseline justify-between">
 
 			@if(! \Cart::session('guest')->isEmpty())
-			<a href="{{ route('checkout.index') }}" class="mr-5 text-md font-bold">Checkout</a>
+			<a href="{{ route('checkout.index') }}" class="text-md font-bold">Checkout</a>
 			@endif
 
 			@guest()
-			<a href="{{ route('login') }}" class="mr-5 text-md font-bold">Login</a>
-			<a href="{{ route('register') }}" class="mr-5 text-md font-bold">Register</a>
+			<a href="{{ route('login') }}" class="text-md font-bold">Login</a>
+			<a href="{{ route('register') }}" class="text-md font-bold">Register</a>
 			@endguest
 
 			@auth()
 			<a href="{{ route('profile.show', Auth::user()->name) }}" 
-				class="mr-5 text-md font-bold ">
+				class="text-md font-bold ">
 				{{ Auth::user()->name }}
 			</a>
 			<a 
 			href="{{ route('logout') }}" 
 			onclick="event.preventDefault();
 			document.getElementById('logoutForm').submit()"
-			class="mr-5 text-md font-bold"
+			class="text-md font-bold"
 			>Log Out</a>
 			<form class="hidden" method="POST" 
 			action="{{ route('logout') }}" id="logoutForm">
@@ -38,10 +32,16 @@
 		</form>
 		@endauth
 
-		<svg id="hambuger" width="24" height="16" xmlns="http://www.w3.org/2000/svg"><g>
+		<a href="{{ route('cart.index') }}" class="relative text-md font-bold">
+			Cart
+			@if(! \Cart::session('guest')->isEmpty())
+			<span class="font-extrabold rounded-full w-7 text-center bg-red-600 text-white absolute bottom-1 left-9">{{ \Cart::session('guest')->getContent()->count() }}</span>
+			@endif
+		</a>
+		
+		<svg id="hambuger" width="24" height="24" xmlns="http://www.w3.org/2000/svg"><g>
 			<path d="M0 0h24v2H0zM0 7h24v2H0zM0 14h24v2H0z"/></g>
 		</svg>
-
 	</div>
 </div>
 
@@ -50,7 +50,7 @@
 	<a href="{{ route('home') }}" class="font-bold text-gray-50 bg-green-500 py-3 px-4 md:pl-20">Random Products</a>
 	<a href="{{ route('category.show', 1) }}" class="font-bold text-gray-50 bg-green-500 py-3 px-4 md:pl-20">Shoes</a>
 	<a href="{{ route('category.show', 2) }}" class="font-bold text-gray-50 bg-green-500 py-3 px-4 md:pl-20">Bags</a>
-	<a href="{{ route('category.show', 3) }}" class="font-bold text-gray-50 bg-green-500 py-3 px-4 md:pl-20">Watch</a>
+	<a href="{{ route('category.show', 3) }}" class="font-bold text-gray-50 bg-green-500 py-3 px-4 md:pl-20">Watches</a>
 	<a href="{{ route('category.show', 4) }}" class="font-bold text-gray-50 bg-green-500 py-3 px-4 md:pl-20">Tops</a>
 	<a href="{{ route('category.show', 5) }}" class="font-bold text-gray-50 bg-green-500 py-3 px-4 md:pl-20">Knickers</a>
 </div>

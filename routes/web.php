@@ -7,9 +7,8 @@ Route::get('/', function () {
     return view('home')
     		->withProducts(
     			\App\Models\Product::where('quantity', '>', 0)
-    			// ->inRandomOrder()
     			->take(20)
-    			->get());
+    			->paginate());
 })
 	->name('home');
 
@@ -33,14 +32,15 @@ Route::delete('cart/{id}', [Controllers\CartController::class, 'destroy'])->name
 Route::get('all', [Controllers\CartController::class, 'all'])->name('cart.all');
 
 Route::get('checkout', [Controllers\CheckoutController::class, 'index'])
-			->middleware('checkout')
-			->name('checkout.index');
+	->middleware('checkout')
+	->name('checkout.index');
 
-Route::group([
-	// 'middleware' => 'admin'
-], function () {
-	Route::resources([
-		'product' => Controllers\ProductController::class,
-		'category' => Controllers\CategoryController::class,
-	]);
+Route::get('category/{category:id}', [Controllers\CategoryController::class, 'show'])
+	->name('category.show');
+	
+Route::middleware('admin')->group(function () {
+	Route::get('product/create', [Controllers\ProductController::class, 'create'])
+		->name('product.create');
+	Route::post('product/store', [Controllers\ProductController::class, 'store'])
+		->name('product.store');
 });

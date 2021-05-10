@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\User;
 use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -42,6 +43,7 @@ class ProductFactory extends Factory
 
         return [
             'user_id' => User::factory(),
+            'category_id' => Category::factory(),
             'name' => $name,
             'description' => $this->faker->sentence(10),
             'price' => (rand(20, 1000) / 10),

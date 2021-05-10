@@ -18,7 +18,7 @@ class CreateCategoriesTable extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->string('name')->unique();
             $table->text('description')->nullable();
-            $table->string('slug')->unique();
+            $table->string('slug')->unique()->nullable();
             $table->timestamps();
 
             $table->index(['id', 'name', 'slug']);

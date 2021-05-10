@@ -9,9 +9,13 @@ use Illuminate\Database\Eloquent\Builder;
 
 class CategoryController extends Controller
 {
-    public function show(Category $category)
+    public function show($id)
     {
-        return view('category.show')->withProducts($category->products);
+        return view('category.show')
+        	->withProducts(
+        		Product::where('quantity', '>', 0)
+        			->where('category_id', $id)->paginate()
+        	);
     }
 
 }

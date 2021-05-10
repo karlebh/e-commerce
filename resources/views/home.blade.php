@@ -3,17 +3,11 @@
 	<div class="flex flex-wrap justify-center">
 		@forelse($products as $product)
 		<div class="">
-			<a href="{{ route('product.show', $product->name) }}">
 				<div class="w-60 h-40 bg-green-400 m-4 text-center p-3">
 					<p>Name: <span class="font-medium font-bold text-white">{{ $product->name }}</span></p>
 					<p>Pice:  <span class="font-medium font-bold text-white">${{ $product->price }}</span></p>
 					<p>Amount Left: <span class="font-medium font-bold text-white">{{ $product->quantity }}</span></p>
-
-					{{ $product->picture() }}
-
 				</div>
-			</a>
-			{{--  --}}
 
 			<form action="{{ route('cart.store') }}" method="POST">
 				@csrf

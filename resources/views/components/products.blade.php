@@ -28,4 +28,8 @@
 	@empty
 		<p class="text-center text-2xl mx-auto">No item(s) in this category</p>
 	@endforelse
+
+	<div class="mt-5">
+		{{ $products->links() }}
+	</div>
 </div>
