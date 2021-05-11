@@ -14,7 +14,7 @@ class ProductController extends Controller
 
     public function store(ProductFormRequest $request)
     {
-        $request->user()->products()->create($request->validated());
+        Product::firstOrCreate($request->validated());
 
         session()->flash('message', 'product created successfully');
 
