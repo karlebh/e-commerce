@@ -1,9 +1,8 @@
 <x-all-layout>
 	<x-jet-validation-errors class="mb-4" />
 
-	<form action="{{ route('product.store') }}" method="post" class="px-4">
+	<form action="{{ route('product.store') }}" method="POST" class="px-4">
 		@csrf
-
 		<div>
 			<x-jet-label for="name" value="{{ __('Product Name') }}" />
 			<x-jet-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
@@ -27,11 +26,6 @@
 				@empty
 					<option>No new category</option>
 				@endforelse
-				{{-- <option value="1">Shoes</option>
-				<option value="2">Bags</option>
-				<option value="3">Watches</option>
-				<option value="4">Tops</option>
-				<option value="5">Knickers</option> --}}
 			</select>
 		</div>
 

@@ -17,21 +17,6 @@ class ProductFactory extends Factory
      */
     protected $model = Product::class;
 
-
-    /**
-     * Configure the model factory.
-     *
-     * @return $this
-     */
-    // public function configure()
-    // {
-    //     return $this->afterMaking(function (Product $product) {
-    //         //
-    //     })->afterCreating(function (Product $product) {
-    //         $product->categories()->attach(rand(1, 10));
-    //     });
-    // }
-
     /**
      * Define the model's default state.
      *

@@ -9,8 +9,10 @@ use Illuminate\Database\Eloquent\Builder;
 
 class CategoryController extends Controller
 {
-    public function show($id)
+    public function show($slug)
     {
+    	$id = Category::whereSlug($slug)->pluck('id')[0];
+
         return view('category.show')
         	->withProducts(
         		Product::where('quantity', '>', 0)
