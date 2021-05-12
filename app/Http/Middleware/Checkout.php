@@ -17,9 +17,9 @@ class Checkout
      */
     public function handle(Request $request, Closure $next)
     {
-        if (\Cart::session('guest')->isEmpty()) {
-            return redirect()->route('home');
+        if (!\Cart::session('guest')->isEmpty()) {
+            return $next($request);
         }
-        return $next($request);
+            return redirect()->route('home');
     }
 }
