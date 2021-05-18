@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use KingFlamez\Rave\Facades\Rave as Flutterwave;
-use Darryldecode\Cart\CartCondition\Cart;
-
 
 class FlutterwaveController extends Controller
 {
@@ -14,43 +12,36 @@ class FlutterwaveController extends Controller
      */
     public function initialize()
     {
-        $data = request()->validate([
-            'name' => 'required|string|min:3|max:70',
-            'email' => 'required|email',
-        ]);
+        //This generates a payment reference
+        $reference = Flutterwave::generateReference();
 
-            //This generates a payment reference
-            $reference = Flutterwave::generateReference();
+        // Enter the details of the payment
+        $data = [
+            'payment_options' => 'card',
+            'amount' => request()->amount,
+            'email' => request()->email,
+            'tx_ref' => $reference,
+            'currency' => "USD",
+            'redirect_url' => route('flutterwave.callback'),
+            'customer' => [
+                'email' => request()->email,
+                "name" => request()->name
+            ],
 
-            // Enter the details of the payment
-            $data = [
-                'payment_options' => 'card', 
-                'amount' => request()->amount,
-                'email' => $data['email'],
-                'tx_ref' => $reference,
-                'currency' => "NGN",
-                'redirect_url' => route('flutterwave.callback'),
-                'customer' => [
-                    'email' => $data['email'],
-                    "name" => $data['name'],
-                ],
+            "customizations" => [
+               'title' => 'Payment for e-commerce products',
+            ]
+        ];
 
-                "customizations" => [
-                    "title" => 'Order placed on lara-ecommerce website',
-                    "description" => (new \Carbon\Carbon(now()))->diffForHumans(),
-                ]
-            ];
+        $payment = Flutterwave::initializePayment($data);
 
-            $payment = Flutterwave::initializePayment($data);
-    
+
         if ($payment['status'] !== 'success') {
-            session()->flash('error', 'Transaction Via Flutterwave not successful!');
-            return redirect()->back();
+            // notify something went wrong
+            return;
         }
 
-        session()->flash('message', 'Transaction Via Flutterwave was successful!');
-        \Cart::session('guest')->clear();
-        return redirect($data['redirect_url']);
+        return redirect()->route('home');
     }
 
     /**

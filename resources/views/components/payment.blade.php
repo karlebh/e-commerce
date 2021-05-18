@@ -1,7 +1,6 @@
 <div class="p-3 mx-auto mt-2 w-full">
 	<div class="tab">
 		<button class="tablinks" onclick="openMethod(event, 'Paystack')" id="defaultOpen" >Paystack</button>
-		<button class="tablinks" onclick="openMethod(event, 'Flutterwave')" >Flutterwave</button>
 		<button class="tablinks" onclick="openMethod(event, 'Stripe')">Stripe</button>
 		<button class="tablinks" onclick="openMethod(event, 'Paypal')">Paypal</button>
 	</div>
@@ -66,59 +65,6 @@
 		</div>
 	</form>
 </div>
-
-
-<!-- Flutterwave Payment -->
-<div id="Flutterwave" class="tabcontent">
-	<h1>Flutterwave</h1> 
-	<form class="max-w-xl m-4 p-10 bg-white rounded shadow-xl" method="POST" action="{{ route('flutterwave.pay') }}">
-		<p class="text-gray-800 font-medium">Customer information</p>
-		{{-- Auth Name --}}
-		<div class="">
-			@auth
-			<label class="block text-sm text-gray-00" for="name">Name</label>
-			<input class="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded" id="name" name="name" type="text" value="{{ Auth::user()->name }}" placeholder="Your Name" aria-label="Name" readonly>
-			@endauth
-
-			@guest()
-
-			<label class="block text-sm text-gray-00" for="name">Name</label>
-			<input class="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded" id="name" name="name" type="text" aria-label="Name" value="{{ old('name') }}">
-
-			@error('name')
-			<p class="text-sm text-red-400 font-bold mt-1">{{ $message }}</p>
-			@enderror
-			@endguest
-		</div>
-
-		@auth()
-		<div class="mt-2">
-			<label class="block text-sm text-gray-600" for="email">Email</label>
-			<input class="w-full px-5  py-4 text-gray-700 bg-gray-200 rounded" id="email" name="email" type="text" aria-label="Email" value="{{ Auth::user()->email }}" readonly>
-		</div>
-		@endauth
-
-		@guest()
-		<div class="mt-2">
-			<label class="block text-sm text-gray-600" for="email">Email</label>
-			<input class="w-full px-5  py-4 text-gray-700 bg-gray-200 rounded" id="email" name="email" type="text" required="" placeholder="Your Email" aria-label="Email" value="{{ old('email') }}">
-		</div>
-
-		@error('email')
-		<p class="text-sm text-red-400 font-bold mt-1">{{ $message }}</p>
-		@enderror
-		@endguest
-		
-		<input type="hidden" name="amount" value="{{ Cart::session('guest')->getTotal() }}">
-
-		{{ csrf_field() }}
-
-		<div class="mt-4">
-			<button class="px-4 py-1 text-white text-xl tracking-wider bg-gray-900 rounded" type="submit">Checkout!</button>
-		</div>
-	</form>
-</div>
-
 
 <div id="Stripe" class="tabcontent">
 	<br>

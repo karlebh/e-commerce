@@ -44,3 +44,7 @@ Route::middleware('admin')->group(function () {
 	Route::post('product/store', [Controllers\ProductController::class, 'store'])
 		->name('product.store');
 });
+
+// Route::post('/pay', [Controllers\PayController::class, 'initialize'])->name('pay');
+// Route::get('/rave/callback', [Controllers\PayController::class, 'callback'])->name('callback');
+Route::view('payer', 'pay');
