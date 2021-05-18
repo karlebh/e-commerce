@@ -19,8 +19,6 @@ class FlutterwaveController extends Controller
             'email' => 'required|email',
         ]);
 
-         \Cart::session('guest')->clear();
-
             //This generates a payment reference
             $reference = Flutterwave::generateReference();
 
@@ -34,7 +32,6 @@ class FlutterwaveController extends Controller
                 'redirect_url' => route('flutterwave.callback'),
                 'customer' => [
                     'email' => $data['email'],
-                    // "phonenumber" => request()->phone,
                     "name" => $data['name'],
                 ],
 
@@ -51,9 +48,8 @@ class FlutterwaveController extends Controller
             return redirect()->back();
         }
 
-       
-
-        // return redirect($payment['data']['link']);
+        session()->flash('message', 'Transaction Via Flutterwave was successful!');
+        \Cart::session('guest')->clear();
         return redirect($data['redirect_url']);
     }
 

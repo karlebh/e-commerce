@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use Paystack;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Redirect;
 use Darryldecode\Cart\CartCondition\Cart;
 
 class PaystackController extends Controller
@@ -24,19 +23,16 @@ class PaystackController extends Controller
             'email' => 'required|email',
         ]);
 
-        try{
+        try {
             $success = Paystack::getAuthorizationUrl()->redirectNow();
 
             \Cart::session('guest')->clear();
-
+            session()->flash('message', 'Transaction Via Paystack was successful!');
             return $success;
-        }catch(\Exception $e) {
-            return Redirect::back()
-                    ->withMessage(
-                        [
-                            'msg'=>'The paystack token has expired. Please refresh the page and try again.',
-                            'type'=>'error'
-                        ]);
+
+        } catch(\Exception $e) {
+            session()->flash('error', 'Transaction Via Paystack was not successful!');
+            return back();
         }        
     }
 
