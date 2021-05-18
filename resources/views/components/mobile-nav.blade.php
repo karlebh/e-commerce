@@ -1,7 +1,12 @@
 <div class="lg:hidden">
 	<div class="flex flex-col gap-10 p-6 bg-gray-200">
-		<div class="">
+		<div class="flex justify-between px-4" x-data"{ open: false}">
 			<a href="/"><h1 class="font-bold text-2xl">E Commerce</h1></a>
+
+			 <svg id="hambuger" class="-mb-2 h-6 w-10 lg:hidden" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+	            <path class="inline-flex" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+	            <path class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+	        </svg>
 		</div>
 
 		<div class="flex items-baseline justify-between">
@@ -32,17 +37,14 @@
 		</form>
 		@endauth
 
-		<a href="{{ route('cart.index') }}" class="relative text-md font-bold">
+		<a href="{{ route('cart.index') }}" class="relative text-md font-bold mr-4">
 			Cart
 			@if(! \Cart::session('guest')->isEmpty())
-			<span class="font-extrabold rounded-full w-7 text-center bg-red-600 text-white absolute bottom-1 left-9">{{ \Cart::session('guest')->getContent()->count() }}</span>
+			<span class="font-extrabold rounded-full w-7 text-center bg-red-600 text-white absolute bottom-1 left-9">
+				{{ \Cart::session('guest')->getContent()->count() }}
+			</span>
 			@endif
 		</a>
-		
-		  <svg id="hambuger" class="-mb-2 h-6 w-10" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-            <path class="inline-flex" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-            <path class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-        </svg>
 	</div>
 </div>
 
@@ -54,12 +56,6 @@
     @empty
         <p>No new category</p>
     @endforelse
-{{-- 
-	<a href="{{ route('category.show', 1) }}" class="font-bold text-gray-50 bg-green-500 py-3 px-4 md:pl-20">Shoes</a>
-	<a href="{{ route('category.show', 2) }}" class="font-bold text-gray-50 bg-green-500 py-3 px-4 md:pl-20">Bags</a>
-	<a href="{{ route('category.show', 3) }}" class="font-bold text-gray-50 bg-green-500 py-3 px-4 md:pl-20">Watches</a>
-	<a href="{{ route('category.show', 4) }}" class="font-bold text-gray-50 bg-green-500 py-3 px-4 md:pl-20">Tops</a>
-	<a href="{{ route('category.show', 5) }}" class="font-bold text-gray-50 bg-green-500 py-3 px-4 md:pl-20">Knickers</a> --}}
 </div>
 </div>
 

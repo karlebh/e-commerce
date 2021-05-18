@@ -35,6 +35,7 @@
 	<br>
 	<br>
 	<div class="text-center">
-		<h1 class="text-green-600 text-4xl font-extrabold">Total: ${{ Cart::session('guest')->getTotal()}}</h1>
+		<h1 class="text-green-600 text-4xl font-extrabold">
+			Total: ${{ Cart::session('guest')->getTotal()}}</h1>
 	</div>
 </div>

@@ -1,5 +1,4 @@
 <x-all-layout>
-
 	<div class="flex flex-wrap justify-center">
 		@forelse($products as $product)
 		<div class="">
