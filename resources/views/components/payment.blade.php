@@ -6,69 +6,6 @@
 	  <button class="tablinks" onclick="openMethod(event, 'Paypal')">Paypal</button>
 	</div>
 
-	<!-- Paystack Payment -->
-	<div id="Paystack" class="tabcontent mt-10">
-
-	<form method="POST" action="{{ route('paystack.pay') }}" accept-charset="UTF-8" 
-					class="max-w-xl m-4 p-10 bg-white rounded shadow-xl" role="form">
-        <div class="col-md-8 col-md-offset-2">
-
-        	@auth()
-				<div class="">
-					<label class="block text-sm text-gray-00" for="name">Name</label>
-					<input class="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded" id="name" name="name" type="text" readonly placeholder="Your Name" aria-label="Name" value="{{ Auth::user()->name }}">
-				</div>
-        	@endauth
-			
-			@guest()
-	        	<div class="">
-					<label class="block text-sm text-gray-00" for="name">Name</label>
-					<input class="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded" id="name" name="name" type="text" required="" placeholder="Your Name" aria-label="Name" value="{{ old('name') }}">
-			      @error('name')
-					<p class="text-sm text-red-400 font-bold mt-1">{{ $message }}</p>
-			      @enderror
-			    </div>
-		    @endguest
-
-		    @auth()
-			     <div class="mt-2">
-					<label class="block text-sm text-gray-600" for="email">Email</label>
-					<input class="w-full px-5  py-4 text-gray-700 bg-gray-200 rounded" id="email" name="email" type="text" aria-label="Email" value="{{ Auth::user()->email }}" readonly>
-			    </div>
-		    @endauth
-			
-			@guest
-
-		     <div class="mt-2">
-				<label class="block text-sm text-gray-600" for="email">Email</label>
-				<input class="w-full px-5  py-4 text-gray-700 bg-gray-200 rounded" id="email" name="email" type="text" required="" placeholder="Your Email" aria-label="Email" value="{{ old('email') }}">
-		    </div>
-		    @error('email')
-				<p class="text-sm text-red-400 font-bold mt-1">{{ $message }}</p>
-		    @enderror
-
-		    @endguest
-
-
-            {{-- <input type="hidden" name="orderID" value="345"> --}}
-            <input type="hidden" name="amount" value="{{ Cart::session('guest')->getTotal() * 100}}"> {{-- required in kobo --}}
-            <input type="hidden" name="quantity" value="1">
-            <input type="hidden" name="currency" value="NGN">
-            <input type="hidden" name="metadata" value="{{ json_encode($array = ['key_name' => 'value',]) }}" > {{-- For other necessary things you want to add to your payload. it is optional though --}}
-            <input type="hidden" name="reference" value="{{ Paystack::genTranxRef() }}"> {{-- required --}}
-            {{ csrf_field() }} {{-- works only when using laravel 5.1, 5.2 --}}
-
-
-            <p>
-                <button class="px-4 py-1 text-white text-xl tracking-wider bg-gray-900 rounded mt-3" type="submit" value="Pay Now!">
-                    Pay Now!
-                </button>
-            </p>
-        </div>
-	</form>
-
-	</div>
-
 	<!-- Flutterwave Payment -->
 	<div id="Flutterwave" class="tabcontent">
 		<h1>Flutterwave</h1> 
@@ -122,13 +59,13 @@
 
 	<div id="Stripe" class="tabcontent">
 		<br>
-	  <h3 class="text-center text-xl text-blue-400">Coming Soon!</h3>
+	  <h3 class="text-center text-xl text-blue-700 mt-8">Coming Soon!</h3>
 		<br>
 	</div>
 
 	<div id="Paypal" class="tabcontent">
 		<br>
-	  <h3 class="text-center text-xl text-blue-400">Coming Soon!</h3>
+	  <h3 class="text-center text-xl text-blue-700 mt-8">Coming Soon!</h3>
 		<br>
 	</div>
 </div>

@@ -1,7 +1,9 @@
 <x-guest-layout>
     <x-jet-authentication-card>
         <x-slot name="logo">
-            <x-jet-authentication-card-logo />
+            <a href="{{ route('home') }}">
+                <h1 class="text-4xl font-medium text-gray-700">E  Commerce</h1>
+            </a>
         </x-slot>
 
         <x-jet-validation-errors class="mb-4" />
@@ -38,6 +40,9 @@
                         {{ __('Forgot your password?') }}
                     </a>
                 @endif
+
+                <a class="ml-4 underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('register') }}">{{ __('Register') }}
+                </a>
 
                 <x-jet-button class="ml-4">
                     {{ __('Log in') }}
