@@ -49,7 +49,7 @@
 			@endguest
 
 
-			<input type="hidden" name="amount" value="{{ Cart::session('guest')->getTotal() * 100}}"> 
+			<input type="hidden" name="amount" value="{{ Cart::session('guest')->getTotal() * 100 * 480}}"> 
 			<input type="hidden" name="quantity" value="1">
 			<input type="hidden" name="currency" value="NGN">
 			<input type="hidden" name="metadata" value="{{ json_encode($array = ['key_name' => 'value',]) }}" >
